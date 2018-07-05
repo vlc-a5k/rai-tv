@@ -1,8 +1,7 @@
 --SD_Description=Rai TV
 --[[
- Copyright © 2010-2011 AUTHORS
-
- Authors: ale5000
+ Copyright © 2010-2011, 2018 ale5000
+ SPDX-License-Identifer: GPL-2.0-or-later
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -21,20 +20,20 @@
 
 --[[
 	How to install and use:
-	1) Install VLC 1.1.0 - 2010-05-24 (see Know issues)
+	1) Install VLC 1.1.0 or higher
 	2) Place the script in:
 		- Windows (all users):		%ProgramFiles%\VideoLAN\VLC\lua\sd\
 		- Windows (current user):	%APPDATA%\VLC\lua\sd\
-		- Linux (all users):			/usr/share/vlc/lua/sd/
+		- Linux (all users):		/usr/share/vlc/lua/sd/
 		- Linux (current user):		~/.local/share/vlc/lua/sd/
-		- Mac OS X (all users):		VLC.app/Contents/MacOS/share/lua/sd/
+		- Mac OS X (all users):		/Applications/VLC.app/Contents/MacOS/share/lua/sd/
+		- Mac OS X (current user):	~/Library/Application Support/org.videolan.vlc/lua/sd/
 	3) Open VLC, then go on Media Browser => Internet => Rai TV
 
 	Notes
 	- It doesn't require any external program
 
 	Know issues
-	- Unfortunately this script doesn't work with the latest version of VLC, you must use the branch nightly build of VLC with date 2010-05-24; Windows users can find it here: http://nightlies.videolan.org/build/win32/backup/branch-20100524-0202/
 	- The first four channels aren't working
 	- If you wait too much time to open the streaming after the script is loaded it might not work, just close and reopen VLC
 
