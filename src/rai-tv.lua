@@ -211,7 +211,7 @@ function get_server_date()
 
 	-- Global
 	server_time = day.."-"..month.."-"..year.." "..hours..":"..minutes..":"..(seconds + 1)
-	local_time = vlc.misc.mdate()
+	local_time = os.time()
 	log_message("Date: "..server_time, "info")
 
 	return true
@@ -316,7 +316,7 @@ end]]
 
 function main()
 	local loading = vlc.sd.add_item( {path="vlc://nop", title="Loading...", textcolor="blue"} )	-- textcolor isn't not yet supported :-D
-	math.randomseed( vlc.misc.mdate() )
+	math.randomseed( os.time() )
 
 	if get_server_date() then
 		add_channels()
