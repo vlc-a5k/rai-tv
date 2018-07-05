@@ -47,7 +47,7 @@ proxy = ""
 function descriptor()
 	return {
 				title = "Rai TV";
-				version = "0.04";
+				version = "0.05";
 				author = "ale5000";
 				url = "http://addons.videolan.org/usermanager/search.php?username=ale5000&action=contents";
 				description = "It allow to see the Rai TV channels directly in VLC."
