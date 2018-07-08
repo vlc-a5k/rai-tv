@@ -55,7 +55,7 @@ function descriptor()
 				title = "Rai TV";
 				version = "0.6.0";
 				author = "ale5000";
-				url = "http://addons.videolan.org/usermanager/search.php?username=ale5000&action=contents";
+				url = "https://addons.videolan.org/p/1153977/";
 				description = "It allow to see the Rai TV channels directly in VLC."
 			}
 end
