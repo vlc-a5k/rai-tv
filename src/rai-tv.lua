@@ -1,4 +1,5 @@
 --SD_Description=Rai TV
+
 --[[
  Copyright © 2010-2011, 2018 ale5000
  SPDX-License-Identifer: GPL-3.0-or-later
@@ -313,7 +314,7 @@ end
 end]]
 
 function main()
-	local loading = vlc.sd.add_item( {path="vlc://nop", title="Loading...", textcolor="blue"} )	-- textcolor isn't not yet supported :-D
+	local loading = vlc.sd.add_item( { title="Loading...", path="vlc://nop", arturl="vlc://nop", textcolor="blue" } )  -- textcolor isn't not yet supported :-D
 	math.randomseed( os.time() )
 
 	if get_server_date() then
