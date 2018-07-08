@@ -40,6 +40,12 @@
 	PS: I don't take responsibility for the way this script is used
 ]]
 
+-- Global variables (they are local to this file)
+local lazily_loaded = false
+local random        = nil
+local floor         = nil
+local byte_to_char  = nil
+
 -- The proxy should be in the format "http://ip:port", example: "http://127.0.0.1:8080"
 -- If you don't want to use it, just leave as is
 proxy = ""
@@ -54,6 +60,16 @@ function descriptor()
 			}
 end
 
+
+function lazy_load()
+	if lazily_loaded then return nil end
+
+	random = math.random
+	floor = math.floor
+	byte_to_char = string.char
+
+	lazily_loaded = true
+end
 
 function show_error(error_msg)
 	error_msg = "[Rai TV] "..error_msg
@@ -317,6 +333,8 @@ function main()
 	local loading = vlc.sd.add_item( { title="Loading...", path="vlc://nop", arturl="vlc://nop", textcolor="blue" } )  -- textcolor isn't not yet supported :-D
 	math.randomseed( os.time() )
 
+	lazy_load()
+
 	if get_server_date() then
 		add_channels()
 	end
@@ -325,10 +343,6 @@ function main()
 end
 
 -- Global variables
-random = math.random
-floor = math.floor
-byte_to_char = string.char
-
 server_time = ""
 local_time = ""
 
