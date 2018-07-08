@@ -238,7 +238,7 @@ function add_channels()
 	local current_title, i, j
 	local channels_length = #channels
 
-	local user_agent = "http-user-agent=Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
+	local user_agent = "http-user-agent=Mozilla/5.0 (X11; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0"
 	-- Proxomitron
 	local headers = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"..
 	"Accept-Language: it-it,it;q=0.8,en-us;q=0.5,en;q=0.3\r\n"..
