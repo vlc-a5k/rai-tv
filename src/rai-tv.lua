@@ -42,7 +42,6 @@
 
 -- Global variables (they are local to this file)
 local lazily_loaded = false
-local random        = nil
 local floor         = nil
 local byte_to_char  = nil
 
@@ -64,7 +63,6 @@ end
 function lazy_load()
 	if lazily_loaded then return nil end
 
-	random = math.random
 	floor = math.floor
 	byte_to_char = string.char
 
@@ -99,6 +97,35 @@ function log_message(message, type)
 	return true
 end
 
+
+local rand_table, real_rand
+function get_rand()
+	local ret
+	local table_size = 99
+	if rand_table == nil then
+		local seed
+		rand_table = {}
+		real_rand = math.random
+
+		if vlc ~= nil and vlc.misc ~= nil then seed = vlc.misc.mdate() else seed = os.time() end
+		math.randomseed(tonumber(tostring(seed):reverse():sub(1, 6)))
+		real_rand()
+
+		for i = 1, table_size do
+			rand_table[i] = real_rand()
+		end
+	end
+
+	local i = 1 + math.floor(real_rand() * (table_size))
+	ret, rand_table[i] = rand_table[i], real_rand()
+
+	return ret
+end
+
+function get_rand_minmax(min, max)
+	if min > max then error("bad argument #1 to 'get_rand_minmax' (interval is empty)") end
+	return min + math.floor(get_rand() * (max-min+1))
+end
 
 --[[function bin_xor_slow(a,b)		-- Bitwise XOR by Reuben Thomas
 	if a == nil or b == nil then vlc.msg.err("You cannot pass a nil value") return nil end
@@ -189,7 +216,7 @@ end
 
 
 function get_server_date()
-	local rnd, dataBuffer = random(100000, 999999), ""
+	local rnd, dataBuffer = get_rand_minmax(100000, 999999), ""
 
 	--[[local user_agent = "http-user-agent=Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1"
 	local headers = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"..
@@ -239,9 +266,9 @@ function get_auth(chan_id)
 
 	local key="hMrxuE2T8V0WRW0VmHaKMoFwy1XRc+hK7eBX2tTLVTw="
 	--log_message("Key: "..key, "debug")
-	local rnd1 = random(13, 1192)
-	local rnd2 = random(40, 1222)
-	local rnd3 = random(0, 28)
+	local rnd1 = get_rand_minmax(13, 1192)
+	local rnd2 = get_rand_minmax(40, 1222)
+	local rnd3 = get_rand_minmax(0, 28)
 	local token = year..";"..chan_id..";"..day.."-"..month.."-"..rnd1.."-"..hours.."-"..minutes.."-"..seconds.."-"..rnd2
 	log_message("Token: "..token, "debug")
 	local ttAuth = encode3(encode2(encode1(token, rnd3)..";"..rnd3, key))
@@ -331,7 +358,6 @@ end]]
 
 function main()
 	local loading = vlc.sd.add_item( { title="Loading...", path="vlc://nop", arturl="vlc://nop", textcolor="blue" } )  -- textcolor isn't not yet supported :-D
-	math.randomseed( os.time() )
 
 	lazy_load()
 
